@@ -1,0 +1,33 @@
+
+<!-- Here whatever you write in the box is gonna show as a part of the wecloming -->
+<div class="m-3" id="Welcoming-section">
+    <label for="exampleInputEmail1">User Name: </label>
+    <input [(ngModel)]="userName" placeholder="Enter you userName"  class="form-control" id="exampleInputEmail1"/>
+    <h2 class="mt-2">Welcome <span [class]="userNameStyle">{{userName | uppercase}}</span> to {{softwareName}} <i class="fa-solid fa-list-check"></i></h2> 
+</div>
+
+
+<div class="task-creation m-3">
+    <input [(ngModel)]="newTaskName" placeholder="enter the new task name" class="form-control"/>
+    <input [(ngModel)]="newTaskPriority" placeholder="enter the new task priority" class="form-control mt-2"/>
+    <button (click)="addTask()" class="mt-2">Add Task</button>
+</div>
+
+<div id="search-tasks" class="m-3">
+    <input [(ngModel)]="searchTerm"  placeholder="search tasks by name"/>
+    <!-- <div [innerHTML]=" 'majd jala' | highlight: searchTerm"></div> -->
+</div>
+
+<div id="tasks-list">
+    @if(tasks.length == 0) {
+        <p>No tasks available yet</p>
+    }
+    <ul>
+        @for(task  of tasks; track task.name) {
+            <li>
+                <span [innerHTML]="(task.name + ' - Priority: ' + task.priority) | highlight:searchTerm"></span>
+            </li>
+        }
+    </ul>
+</div>
+
